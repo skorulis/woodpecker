@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Canvas Test</title>
+	
+	<script>
+	
+	var c;
+	var circles = new Array();
+	
+	function init() {
+		c = document.getElementById('canvas1');
+		var ctx = c.getContext("2d");
+
+		
+		for(var i=0; i < 5; ++i) {
+			var circle = new Object();
+			circle.x = rand(20,c.width-20);
+			circle.y = rand(20,c.height-20);
+			circle.size = rand(20,40);
+			circle.color = randomColor();
+			circles.push(circle);
+			//drawCircle(circle);
+		}
+		
+		setInterval(step,17);
+	}
+	
+	function drawCircle(circle) {
+		var ctx = c.getContext("2d");
+		ctx.fillStyle=circle.color;
+		ctx.beginPath();
+		ctx.arc(circle.x,circle.y,circle.size,0,2*Math.PI);
+		ctx.fill();
+	}
+	
+	function step() {
+		for(var i=0; i < circles.length; ++i) {
+			drawCircle(circles[i]);
+			circles[i].size+=0.1;
+		}
+	}
+	
+	function rand(min,max) {
+		return min + Math.random()*(max-min);
+	}
+	
+	
+	function randomColor() {
+    	var letters = '0123456789ABCDEF'.split('');
+    	var color = '#';
+    	for (var i = 0; i < 6; i++ ) {
+        	color += letters[Math.round(Math.random() * 15)];
+    	}
+    return color;
+}
+	
+	
+	
+	</script>
+	
+</head>
+<body onload="init()">
+<canvas id="canvas1" width="200" height="200" style="border:1px solid #000000;" >
+Canvas is not supported
+</canvas>
+
+</body>
+
+</html>
